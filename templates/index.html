@@ -1,0 +1,237 @@
+
+{% include 'header.html' %}
+
+		<div class="fh5co-hero">
+			<div class="fh5co-overlay"></div>
+			<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url({{ url_for('static', filename='images/1.jpg') }});">
+				<div class="desc">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10">
+								<div class="tabulation animate-box">
+								 				<!-- Nav tabs -->
+                   <ul class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active col-sm-3 col-md-3">
+                        <a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">Flights</a>
+                      </li>
+                      <li role="presentation" class="col-sm-2 col-md-2">
+                         <a href="#hotels" aria-controls="hotels" role="tab" data-toggle="tab">Hotels</a>
+                      </li>
+                      <li role="presentation" class="col-sm-2 col-md-2">
+                         <a href="#food" aria-controls="food" role="tab" data-toggle="tab">food</a>
+                      </li>
+                      <li role="presentation" class="col-sm-3 col-md-3">
+                        <a href="#poi" aria-controls="poi" role="tab" data-toggle="tab">points of interest</a>
+                      </li>
+                   </ul>
+
+								   <!-- Tab panes -->
+										<div class="tab-content">
+
+
+<!-- form flight -->
+										 <div role="tabpanel" class="tab-pane active" id="flights">
+										 	<form action = "http://localhost:5000/response" method = "POST">
+											<div id="scoped-content" class="row">
+
+								                                           <style>
+								                        .inputs {
+														  display: none;
+														}
+														input[type=checkbox]:checked + .inputs {
+														  display: initial;
+														}
+								                        </style>
+
+
+												<div class="col-xxs-7 col-xs-4 mt">
+													<div class="input-field autocomplete" style="color: black">
+														<label for="from">From:</label>
+														<input id="myInput" type="text" class="form-control" id="from-place" required placeholder="Los Angeles, USA" name="from" required autocomplete="off" />
+													</div>
+												</div>
+												<div class="col-xxs-7 col-xs-4 mt">
+													<div class="input-field autocomplete" style="color: black">
+														<label for="from">To:</label>
+														<input id="myInput2" type="text" class="form-control" id="to-place" required placeholder="Tokyo, Japan" name="to" required autocomplete="off"/>
+													</div>
+												</div>
+												<div class="col-xxs-5 col-xs-2 mt ">
+													<div class="input-field">
+														<label for="date-start">Date:</label>
+														<input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy" name="date-start" required autocomplete="off" data-date-format="yyyy-mm-dd"/>
+													</div>
+												</div>
+												 <div class="col-xxs-5 col-xs-2 mt">
+												 	<div class="input-field hde">
+														<label for="date-end">Return:</label>
+												<input type="checkbox" class="foo">
+											  <div class="inputs">
+
+
+														<input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy" name="date-end" data-date-format="yyyy-mm-dd" autocomplete="off"/>
+													</div>
+												</div>
+
+												  </div>
+
+
+												<div class="col-xs-offset-3 col-xs-6">
+													<input type="submit" class="btn btn-primary btn-block" value="search flight">
+												</div>
+											</div>
+											</form>
+										 </div>
+
+  <!--form hotel  -->
+          <div role="tabpanel" class="tab-pane" id="hotels">
+            <form action="http://localhost:5000/response_hotel" method = "POST">
+                    <div class="row">
+                      
+                      <div class="col-xxs-12 col-xs-7 mt">
+                        <div class="input-field">
+                          <label for="from">City:</label>
+                          <input type="text" class="form-control" name="city" id="to-place" autocomplete="off" required placeholder="Tokyo, Japan"/>
+                        </div>
+                      </div>
+                      <div class="col-xxs-12 col-xs-6 mt alternate">
+                        <div class="input-field">
+                          <label for="date-start">Departs:</label>
+                          <input type="text" class="form-control" id="date-start" name="date-start" required autocomplete="off" placeholder="mm/dd/yyyy" data-date-format="yyyy-mm-dd"/>
+                        </div>
+                      </div>
+                      <div class="col-xxs-12 col-xs-6 mt alternate">
+                        <div class="input-field">
+                          <label for="date-end">Return:</label>
+                          <input type="text" class="form-control" id="date-end" name="date-end" autocomplete="off" required placeholder="mm/dd/yyyy" data-date-format="yyyy-mm-dd"/>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-xs-6 mt">
+                        <section>
+                          <label for="class">Rooms:</label>
+                          <select class="cs-select cs-skin-border" name="rooms">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                          </select>
+                        </section>
+                      </div>
+                      <div class="col-xxs-12 col-xs-6 mt">
+                        <section>
+                          <label for="class">Adult:</label>
+                          <select class="cs-select cs-skin-border" name="adults">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                          </select>
+                        </section>
+                      </div>
+                      <div class="col-xxs-12 col-xs-6 mt">
+                        <section>
+                          <label for="class">Children:</label>
+                          <select class="cs-select cs-skin-border" name="children">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                          </select>
+                        </section>
+                      </div>
+                      <div class="col-xxs-12 col-xs-6 mt">
+                        <section>
+                          <label for="class">Price range €:</label>
+                          <select class="cs-select cs-skin-border" name="price">
+                            <option value="" >none</option>
+                            <option value="0-50">0-50</option>
+                            <option value="50-100">50-100</option>
+                            <option value="100-500">100-500</option>
+                            <option value="500-1000">500-1000</option>
+                            <option value="1000-10000">200-1000</option>
+                          </select>
+                        </section>
+                      </div>
+                      <div class="col-xs-offset-3 col-xs-6">
+                        <input type="submit" class="btn btn-primary btn-block" value="Search Packages">
+                      </div>
+                    </div>
+                    </form>
+                   </div>
+          <!-- form food -->
+                   <div role="tabpanel" class="tab-pane" id="food">
+            <form action = "http://localhost:5000/food" method = "POST">
+                    <div class="row">
+  
+                      <div class="col-xxs-12 col-xs-6 mt">
+                        <div class="input-field">
+                          <label for="from">Destination:</label>
+                          <input type="text" class="form-control" name="place" id="to-place" required autocomplete="off" placeholder="Tokyo, Japan"/>
+                        </div>
+                      </div>
+                      
+                      <div class="col-sm-12 mt">
+                          <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="restaurants" name="check" id="restautrants">
+                <label class="form-check-label" for="restautrants">
+                  restautrants
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="bars" id="bars" name="check">
+                <label class="form-check-label" for="bars">
+                  bars
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="fast_foods" name="check" id="fast_foods">
+                <label class="form-check-label" for="fast foods">
+                  fast foods
+                </label>
+              </div>
+              
+                      </div>
+                     
+                      <div class="col-xs-offset-3 col-xs-6">
+                        <input type="submit" class="btn btn-primary btn-block" value="Search food">
+                      </div>
+                    </div>
+                    </form>
+                   </div>
+                   <!--points of interest -->
+                   <div role="tabpanel" class="tab-pane" id="poi">
+            <form action = "http://localhost:5000/poi" method = "POST">
+                    <div class="row">
+                      
+                      <div class="col-xxs-12 col-xs-6 mt">
+                        <div class="input-field">
+                          <label for="from">Destination:</label>
+                          <input type="text" class="form-control" id="to-place" name="place" autocomplete="off" required placeholder="Tokyo, Japan"/>
+                        </div>
+                      </div>
+
+                      <div class="col-xs-offset-3 col-xs-6">
+                        <input type="submit" class="btn btn-primary btn-block" value="search points of interest">
+                      </div>
+                    </div>
+                    </form>
+                   </div>
+
+
+										</div>
+
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+{% include 'autocomplete.html' %}
+{% include 'footer.html' %}

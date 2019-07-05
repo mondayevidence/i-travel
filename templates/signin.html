@@ -1,0 +1,92 @@
+
+{% include 'header.html' %}
+{% block content %}
+
+<div id="fh5co-features">
+	<div class="container">
+		<div class="form">
+
+			<ul class="tab-group" id="tab-con" role="tablist">
+				<li class="active"><a data-toggle="tab" href="#signup">Sign Up</a></li>
+				<li><a data-target = "#login" data-toggle="tab" href="#login">Log in</a></li>
+			</ul>
+			<div class="tab-content" id="tab-con">
+				<div class = "center-div">
+					<div class="btn white darken-4">
+						<a href="http://localhost:5000/signin/signup_with_google" style="text-transform:none">
+							<div class="left">
+								<img width="20px" alt="Google &quot;G&quot; Logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"/>
+							</div>
+							Login with Google
+						</a>
+					</div>
+				</div>
+
+				<div id="signup" class="tab-pane fade in active">
+					<h1>Sign Up</h1>
+					<form action="http://localhost:5000/signin/sign_up" method="post">
+						<div class="top-row">
+							<div class="field-wrap">
+								<label>
+									{{register.firstname.label}}<span class="req">*</span>
+								</label> <br><br>
+								<input type="text"  name="firstname" required autocomplete="off" />
+							</div>
+
+							<div class="field-wrap">
+								<label>
+								{{ register.lastname.label }}
+								</label> <br><br>
+								<input type="text"  name="lastname" required autocomplete="off"/>
+							</div>
+						</div>
+
+						<div class="field-wrap">
+							<label>
+							{{ register.email.label }} <span class="req">*</span>
+							</label> <br><br>
+							<input type="email" name="email" required autocomplete="off"/>
+						</div>
+						<div class="field-wrap">
+							<label>
+							{{ register.password.label }}<span class="req">*</span>
+							</label> <br><br>
+							<input type="password"  name="password" required autocomplete="off"/>
+						</div>
+						<button type="submit" class="button button-block"/>Get Started</button>
+					</form>
+				</div>
+
+
+				<div id="login" class="tab-pane" role = "tabpanel">
+					<div class = "form">
+					<h1>Welcome Back!</h1>
+					<form action="http://localhost:5000/sign_in" method="post">
+
+						<div class="field-wrap">
+							<label>
+							{{ form.email.label }}<span class="req">*</span>
+						</label><br><br>
+							<input type="email" name="email"  required autocomplete="off"/>
+						</div>
+						<div class="field-wrap">
+							<label>
+							{{ form.password.label }}<span class="req">*</span>
+						</label><br><br>
+							<input type="password" name="password" required autocomplete="off"/>
+						</div>
+						<!-- <p class="forgot"><a href="#">Forgot Password?</a></p> -->
+						<button class="button button-block"/>Log In</button>
+					</form>
+				</div>
+				</div>
+
+			</div><!-- tab-content -->
+		</div> <!-- /form -->
+
+	</div><!-- container-->
+</div>
+{% endblock %}
+
+	{% include 'autocomplete.html' %}
+	{% include 'footer.html' %}

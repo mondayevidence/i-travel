@@ -1,0 +1,54 @@
+{% include 'header.html' %}
+    <div class="fh5co-hero">
+      <div class=""></div>
+      <div class="" data-stellar-background-ratio="0.5" style="margin-top: 150px;">
+        <div class="desc">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <div class="tabulation animate-box">
+
+                  
+
+                   <!-- Tab panes -->
+                   <div role="tabpanel" class="tab-pane active" id="flights">
+                    <div class="row">
+                      <h3 style="text-align: center; color: orange"> {{results['place']}} </h3>
+                      <div class="col-xxs-12 col-xs-12 mt" style="color: black">
+                         <p style="color: black"> {{results['info']}} </p>
+                     </div>
+                    </div>
+                   </div>
+
+
+
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="map"></div>
+    <script>
+      function initMap() {
+        var locationRio = {lat: {{results['lat']}}, lng: {{results['lng']}} };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: locationRio,
+          gestureHandling: 'cooperative'
+        });
+        var marker = new google.maps.Marker({
+          position: locationRio,
+          map: map,
+          title: 'Hello World!'
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=key&callback=initMap">
+    </script>
+    </div>
+
+    
+{% include 'footer.html' %}

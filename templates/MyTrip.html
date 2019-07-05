@@ -1,0 +1,95 @@
+{% include 'header.html' %}
+<div class="fh5co-hero">
+  <div class="fh5co-overlay"></div>
+  <div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url({{ url_for('static', filename='images/1.jpg') }});">
+    <div class="desc">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-offset-1 col-md-offset-1 col-sm-10 col-md-10">
+            <div class="tabulation animate-box">
+                    <!-- Nav tabs -->
+               <ul class="nav nav-tabs" role="tablist">
+
+                  <li role="presentation" class="col-sm-2 col-md-2">
+                     <a href="#food" aria-controls="food" role="tab" data-toggle="tab">food</a>
+                  </li>
+                  <li role="presentation" class="col-sm-3 col-md-3">
+                    <a href="#poi" aria-controls="poi" role="tab" data-toggle="tab">points of interest</a>
+                  </li>
+               </ul>
+
+               <!-- Tab panes -->
+                <div class="tab-content">
+      <!-- form food -->
+               <div role="tabpanel" class="tab-pane active" id="food">
+                 <table style="color: black">
+                   <tr>
+                    <th> Select </th>
+                     <th>place</th>
+                     <th>rating</th>
+                     <th>address</th>
+                     <th>price level</th>
+                     <th> delete </th>
+                     </tr>
+                     {% for row in food %}
+
+                     <tr>
+                      <form action = "http://localhost:5000/dell" method = "POST">
+                      <td> <input type="checkbox" class="form-control" name="food" value="{{row}}" /></td>
+                        <td>{{ row['place']}}</td>
+                        <td>{{ row['rating']}}</td>
+                        <td>{{ row['address']}}</td>
+                        <td>{{ row['price']}}</td>
+                        <td><input type="submit" class ="btn btn-primary btn-block " name="action" value = "del_food"></td>
+                      </form>
+                     </tr>
+                     {% endfor %}
+
+
+                  </table>
+               </div>
+               <!--points of interest -->
+               <div role="tabpanel" class="tab-pane" id="poi">
+                 <table style="color: black">
+
+                   <tr>
+                    <th> Select </th>
+                     <th>name</th>
+                     <th>rating</th>
+                     <th>address</th>
+                     <th> delete </th>
+                     </tr>
+                     {% for row in place %}
+
+                     <tr>
+                      <form action = "http://localhost:5000/dell" method = "POST">
+                        <td> <input type="checkbox" class="form-control" name="places" value="{{row}}" /></td>
+                        <td>{{ row['place']}}</td>
+                        <td>{{ row['rating']}}</td>
+                        <td>{{ row['address']}}</td>
+                        <td><input type="submit" class ="btn btn-primary btn-block " name="action" value = "del_place"></td>
+                        </form>
+                     </tr>
+                     {% endfor %}
+                   
+                  </table>
+
+               </div>
+
+
+                </div>
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% include 'autocomplete.html' %}
+{% include 'footer.html' %}

@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>i-Travel</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="SDE 2018 project" />
+	<meta name="keywords" content="SDE 2018 Project" />
+	<meta name="author" content="Yamini, Ewoe, Evidence" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+	<!-- Superfish -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/superfish.css') }}">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datepicker.min.css') }}">
+	<!-- CS Select -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/cs-select.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/cs-skin-border.css') }}">
+	
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+	<script src="{{ url_for('static', filename='js/modernizr-2.6.2.min.js') }}"></script>
+	<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+		.g-signin2{
+	margin-left: 200px;
+	margin-bottom: 10px;
+	margin-top: -25px;
+}
+	</style>
+	<!-- <script src="js/modernizr-2.6.2.min.js"></script> -->
+
+	</head>
+	<body>
+		<div id="fh5co-wrapper">
+		<div id="fh5co-page">
+
+		<header id="fh5co-header-section" class="sticky-banner">
+			<div class="container">
+				<div class="nav-header">
+					<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+					<h1 id="fh5co-logo"><a href="{{ url_for('home') }}"><i class="icon-airplane"></i>i-Travel</a></h1>
+					<!-- START #fh5co-menu-wrap -->
+					<nav id="fh5co-menu-wrap" role="navigation">
+						<ul class="sf-menu" id="fh5co-primary-menu">
+							<li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+							<li><a href="{{ url_for('services') }}" class="fh5co-sub-ddown">Services</a></li>
+							<li><a href="{{ url_for('about') }}">About</a></li>
+							{% if user %}
+							<li><a href="{{ url_for('mytrip') }}">My Trip</a></li>
+							<li><a href="{{ url_for('log_out') }}">Sign out</a></li>
+							{% else %}
+							<li><a href="{{ url_for('signin') }}">Sign In</a></li>
+							{% endif %}
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>

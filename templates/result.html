@@ -1,0 +1,218 @@
+{% include 'header.html' %}
+    <div class="fh5co-hero">
+      <div class=""></div>
+      <div class="fh5co-cover" data-stellar-background-ratio="0.5">
+        <div class="desc">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <div class="tabulation animate-box">
+
+
+
+                   <!-- Tab panes -->
+                   <div class="row text-center">
+                    <h3 style="color: black"><span style="font-weight: bold">FROM: </span>{{data['from'][:3]}} - <span style="font-weight: bold">TO: </span>{{data['to'][:3]}} - <span style="font-weight: bold">DEPATURE: </span>{{ data['date-start']}} - <span style="font-weight: bold">RETURN: </span>{{data['date-end']}}</h3>
+                   </div>
+                   <div id="scoped-content">
+                      <style>
+                        .dropbtn {
+                          background-color: orange;
+                          color: black;
+                          padding: 16px;
+                          font-size: 16px;
+                          border: none;
+                        }
+
+                        .dropdown {
+                          position: relative;
+                          display: inline-block;
+                        }
+
+                        .dropdown-content {
+                          display: none;
+                          position: absolute;
+                          background-color: #f1f1f1;
+                          min-width: 160px;
+                          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                          z-index: 1;
+                        }
+
+                        .dropdown-content a {
+                          color: black;
+                          padding: 12px 16px;
+                          text-decoration: none;
+                          display: block;
+                        }
+
+                        .dropdown-content a:hover {background-color: #ddd;}
+
+                        .dropdown:hover .dropdown-content {display: block;}
+
+                        .dropdown:hover .dropbtn {background-color: orange; color: white;}
+                        </style>
+                          <div class="dropdown">
+                            <button class="dropbtn">sort result</button>
+                            <div role="tablist" class="dropdown-content">
+                              <a href="#pi" aria-controls="pi" role="tab" data-toggle="tab">price increasing</a>
+                              <a href="#pd" aria-controls="pd" role="tab" data-toggle="tab">price decreasing</a>
+                              <a href="#di" aria-controls="di" role="tab" data-toggle="tab">duration increasing</a>
+                              <a href="#dd" aria-controls="dd" role="tab" data-toggle="tab">duration decreasing</a>
+                            </div>
+                          </div>
+                  </div>
+                  <div class="tab-content">
+                   <div role="tabpanel" class="tab-pane active" id="pi">
+                     <div id="pi" class="col-xxs-12 col-xs-12 mt" style="color: black">
+                        <table border = 1>
+                          <tr>
+                            
+                            <th> airline </th>
+                            <th> class </th>
+                            <th> depature {{ data['date-start']}}</th>
+                            <th> duration</th>
+                            <th> return {{ data['date-end']}}</th>
+                            <!-- <th> availability </th> -->
+                            <th> price </th>
+                            <th> book </th>
+                            </tr>
+                            {% for result in results |sort(attribute='zprice') %}
+                            <tr style="font-size: small">
+                              
+                              <td style="font-size: medium;"> {{result["airline"]}} <img src="{{result['logo']}}"> </td>
+                              <td> {{result["travelClass"]}} </td>
+                              <td> {{result["take_off"]}} - {{result["arrival"]}} <br> {{result["iata1"]}} - </td>
+                              <td> {{result["duration"]}} </td>
+                              <td> {{result["take_off2"]}} - {{result["arrival2"]}} <br> {{result["r_iata1"]}} - </td>
+                             <!--  <td> {{result["availability"]}} </td> -->
+                              <td> € <span style="font-weight: bold ">{{result["price"]}} </span> <br> {{result["round_trip"]}} </td>
+                              <td> <a href="{{result['airline_link']}}">book</a>   </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                      </div>
+                    </div>
+                   <div role="tabpanel" class="tab-pane" id="pd">
+                     <div id="pd" class="col-xxs-12 col-xs-12 mt" style="color: black">
+                        <table border = 1>
+                          <tr>
+                            {% if user %}
+                            <th> Select </th>
+                            {% endif %}
+                            <th> airline </th>
+                            <th> class </th>
+                            <th> depature {{ data['date-start']}}</th>
+                            <th> duration</th>
+                            <th> return {{ data['date-end']}}</th>
+                            <!-- <th> availability </th> -->
+                            <th> price </th>
+                            <th> book </th>
+                            </tr>
+                            {% for result in results |sort(reverse=True, attribute='zprice') %}
+                            <tr style="font-size: small">
+                              {% if user%}
+                              <td>  <input type="checkbox" class="form-control" name="flight"></td>
+                              {% endif %}
+                              <td style="font-size: medium;"> {{result["airline"]}} <img src="{{result['logo']}}"> </td>
+                              <td> {{result["travelClass"]}} </td>
+                              <td> {{result["take_off"]}} - {{result["arrival"]}} <br> {{result["iata1"]}} - </td>
+                              <td> {{result["duration"]}} </td>
+                              <td> {{result["take_off2"]}} - {{result["arrival2"]}} <br> {{result["r_iata1"]}} - </td>
+                             <!--  <td> {{result["availability"]}} </td> -->
+                              <td> € <span style="font-weight: bold ">{{result["price"]}} </span> <br> {{result["round_trip"]}} </td>
+                              <td> <a href="{{result['airline_link']}}">book</a>   </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                          <!-- {% for result in results %}
+                            <div>{{result["price"]}}</div>
+                          {% endfor %} -->
+                      </div>
+                    </div>
+                   <div role="tabpanel" class="tab-pane" id="di">
+                     <div id="di" class="col-xxs-12 col-xs-12 mt" style="color: black">
+                        <table border = 1>
+                          <tr>
+                            {% if user %}
+                            <th> Select </th>
+                            {% endif %}
+                            <th> airline </th>
+                            <th> class </th>
+                            <th> depature {{ data['date-start']}}</th>
+                            <th> duration</th>
+                            <th> return {{ data['date-end']}}</th>
+                            <!-- <th> availability </th> -->
+                            <th> price </th>
+                            <th> book </th>
+                            </tr>
+                            {% for result in results |sort(attribute='duration') %}
+                            <tr style="font-size: small">
+                              {% if user%}
+                              <td>  <input type="checkbox" class="form-control" name="flight"></td>
+                              {% endif %}
+                              <td style="font-size: medium;"> {{result["airline"]}} <img src="{{result['logo']}}"> </td>
+                              <td> {{result["travelClass"]}} </td>
+                              <td> {{result["take_off"]}} - {{result["arrival"]}} <br> {{result["iata1"]}} - </td>
+                              <td> {{result["duration"]}} </td>
+                              <td> {{result["take_off2"]}} - {{result["arrival2"]}} <br> {{result["r_iata1"]}} - </td>
+                             <!--  <td> {{result["availability"]}} </td> -->
+                              <td> € <span style="font-weight: bold ">{{result["price"]}} </span> <br> {{result["round_trip"]}} </td>
+                              <td> <a href="{{result['airline_link']}}">book</a>   </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                          <!-- {% for result in results %}
+                            <div>{{result["price"]}}</div>
+                          {% endfor %} -->
+                      </div>
+                    </div>
+                   <div role="tabpanel" class="tab-pane" id="dd">
+                     <div id="dd" class="col-xxs-12 col-xs-12 mt" style="color: black">
+                        <table border = 1>
+                          <tr>
+                            {% if user %}
+                            <th> Select </th>
+                            {% endif %}
+                            <th> airline </th>
+                            <th> class </th>
+                            <th> depature {{ data['date-start']}}</th>
+                            <th> duration</th>
+                            <th> return {{ data['date-end']}}</th>
+                            <!-- <th> availability </th> -->
+                            <th> price </th>
+                            <th> book </th>
+                            </tr>
+                            {% for result in results |sort(reverse=True, attribute='duration') %}
+                            <tr style="font-size: small">
+                              {% if user%}
+                              <td>  <input type="checkbox" class="form-control" name="flight"></td>
+                              {% endif %}
+                              <td style="font-size: medium;"> {{result["airline"]}} <img src="{{result['logo']}}"> </td>
+                              <td> {{result["travelClass"]}} </td>
+                              <td> {{result["take_off"]}} - {{result["arrival"]}} <br> {{result["iata1"]}} - </td>
+                              <td> {{result["duration"]}} </td>
+                              <td> {{result["take_off2"]}} - {{result["arrival2"]}} <br> {{result["r_iata1"]}} - </td>
+                             <!--  <td> {{result["availability"]}} </td> -->
+                              <td> € <span style="font-weight: bold ">{{result["price"]}} </span> <br> {{result["round_trip"]}} </td>
+                              <td> <a href="{{result['airline_link']}}">book</a>   </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+                      </div>
+                    </div>
+
+
+                 </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+{% include 'footer.html' %}

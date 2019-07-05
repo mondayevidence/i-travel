@@ -1,0 +1,170 @@
+
+{% include 'header.html' %}
+
+    <div class="fh5co-hero">
+      <div class=""></div>
+      <div class="fh5co-cover" data-stellar-background-ratio="0.5" >
+        <div class="desc">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <div class="tabulation animate-box">
+                        <!-- Nav tabs -->
+                   <ul class="nav nav-tabs" role="tablist">
+                      <li role="presentation" class="active col-sm-4 col-md-4">
+                        <a href="#restaurants" aria-controls="restaurants" role="tab" data-toggle="tab">Restaurants</a>
+                      </li>
+                      <li role="presentation" class="col-sm-4 col-md-4">
+                         <a href="#bars" aria-controls="bars" role="tab" data-toggle="tab">Bars</a>
+                      </li>
+                      <li role="presentation" class="col-sm-4 col-md-4">
+                         <a href="#fast_food" aria-controls="fast_food" role="tab" data-toggle="tab">Fast Food</a>
+                      </li>
+
+                   </ul>
+
+                   <!-- Tab panes -->
+                    <div class="tab-content">
+
+
+<!-- restaurants -->
+                     <div role="tabpanel" class="tab-pane active" id="restaurants">
+                     <div id="restaurants" style="color: black">
+                       <table>
+                          <tr>
+                            {% if user %}
+                            <th> Select </th>
+                            {% endif %}
+                            <th> Restaurant </th>
+                            <th> Location </th>
+                            <th> Rating </th>
+                            <th> Price level </th>
+                            <th> Picture </th>
+                            <th> Maps </th>
+                            <th> Save </th>
+                            </tr>
+                            {% for rest in results['restaurants'] %}
+                            <tr>
+                              <form action = "http://localhost:5000/food_map" method = "POST">
+                                <input type="hidden" name="name" value="{{rest['name']}}" />
+                                <input type="hidden" name="lat" value="{{rest['lat']}}" />
+                                <input type="hidden" name="lng" value="{{rest['lng']}}" />
+                                {% if user %}
+                                <td> <input type="checkbox" class="form-control" name="food" value="{{rest}}" /></td>
+                                {% endif %}
+                                <td> {{rest['name']}} </td>
+                                <td> {{rest["formatted_address"]}} </td>
+                                <td> {{rest['rating']}} </td>
+                                <td> {{rest["price"]}} </td>
+                                {% set image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference="+rest['photo_ref']+"&sensor=false&key=key" %}
+                                <td> <img src="{{image}}" > </td>
+                                <td> <input type="submit" class="btn btn-primary btn-block" name="action" value="view map"></td>
+                                {% if user %}
+                               <td><input type="submit" class ="btn btn-primary btn-block " name="action" value = "save"></td>
+                                {% endif %}
+                              </form>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                     </div>
+
+                  <!--bars  -->
+          <div role="tabpanel" class="tab-pane" id="bars">
+            <div id="bars" style="color: black">
+            <table border = 1>
+                          <tr>
+                            {% if user %}
+                            <th> Select </th>
+                            {% endif %}
+                            <th> Bar </th>
+                            <th> Location </th>
+                            <th> Price level </th>
+                            <th> Rating </th>
+                            <th> Picture </th>
+                            <th> Map </th>
+                            <th> Save </th>
+                            </tr>
+                            {% for bars in results['bars'] %}
+                            <tr>
+                              <form action = "http://localhost:5000/food_map" method = "POST">
+                                <input type="hidden" name="name" value="{{bars['name']}}" />
+                                <input type="hidden" name="lat" value="{{bars['lat']}}" />
+                                <input type="hidden" name="lng" value="{{bars['lng']}}" />
+                                {% if user %}
+                                <td> <input type="checkbox" class="form-control" name="food" value="{{bars}}" /></td>
+                                {% endif %}
+                                <td> {{bars['name']}} </td>
+                                <td> {{bars["formatted_address"]}} </td>
+                                <td> {{bars['rating']}} </td>
+                                <td> {{bars["price"]}} </td>
+                                {% set image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference="+bars['photo_ref']+"&sensor=false&key=key" %}
+                                <td> <img src="{{image}}"> </td>
+                                <td> <input type="submit" class="btn btn-primary btn-block" name="action" value="view map"></td>
+                                {% if user %}
+                               <td><input type="submit" class ="btn btn-primary btn-block " name="action" value = "save"></td>
+                                {% endif %}
+                              </form>
+                            </tr>
+                            {% endfor %}
+                          </table>
+          </div>
+                   </div>
+          <!-- fast food -->
+                   <div role="tabpanel" class="tab-pane" id="fast_food">
+                          <div id="fast_food" style="color: black">
+                        <table border = 1>
+                          <tr>
+                            {% if user %}
+                            <th> Select </th>
+                            {% endif %}
+                            <th> Fast Food </th>
+                            <th> Location </th>
+                            <th> Price level </th>
+                            <th> Rating </th>
+                            <th> Picture </th>
+                            <th> Map </th>
+                            <th> Save </th>
+                            </tr>
+                            {% for fast in results['fast_foods'] %}
+                            <tr>
+                              <form action = "http://localhost:5000/food_map" method = "POST">
+                                <input type="hidden" name="name" value="{{fast['name']}}" />
+                                <input type="hidden" name="lat" value="{{fast['lat']}}" />
+                                <input type="hidden" name="lng" value="{{fast['lng']}}" />
+                                {% if user %}
+                                <td> <input type="checkbox" class="form-control" name="food" value="{{fast}}" /></td>
+                                {% endif %}
+                                <td> {{fast['name']}} </td>
+                                <td> {{fast["formatted_address"]}} </td>
+                                <td> {{fast['rating']}} </td>
+                                <td> {{fast["price"]}} </td>
+                                {% set image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference="+fast['photo_ref']+"&sensor=false&key=key" %}
+                                <td> <img src="{{image}}" > </td>
+                                <td> <input type="submit" class="btn btn-primary btn-block" name="action" value="view"></td>
+                                  {% if user %}
+                                 <td><input type="submit" class ="btn btn-primary btn-block " name="action" value = "save"></td>
+                                  {% endif %}
+                              </form>
+                            </tr>
+                            {% endfor %}
+                          </table>
+                  </div>
+                   </div>
+
+
+                    </div>
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+{% include 'footer.html' %}

@@ -1,0 +1,65 @@
+{% include 'header.html' %}
+
+    <div class="fh5co-hero">
+      <div class=""></div>
+      <div class="fh5co-cover" data-stellar-background-ratio="0.5">
+        <div class="desc">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <div class="tabulation animate-box">
+
+                  
+
+                  
+                   
+                  <div class="tab-content">
+                   <div role="tabpanel" class="tab-pane active" id="pi">
+                     <div id="pi" class="col-xxs-12 col-xs-12 mt" style="color: black">
+                        <table border = 1>
+                          <tr>
+                            
+                             
+                            <th> Hotel </th>
+                            <th> Type </th>
+                            <th> Rating </th>
+                            <th> Price</th>
+                            <th> Image</th>
+                            <th> Details</th>
+                            </tr>
+                          {% for result in results %}
+                            <tr style="font-size: small">
+                              <form action = "http://localhost:5000/hotel_details" method = "POST">
+                              <td> {{result["name"]}} </td>
+                              <td>{{result["type"]}}</td>
+                              <td> {{result["rating"]}} </td>
+                               <input type="hidden" name="data" value="{{data}}" />
+                              <input type="hidden" name="name" value="{{result['name']}}" />
+                              <input type="hidden" name="photo" value="{{result['photo_ref']}}" />   
+                              <td> € <span style="font-weight: bold ">{{result["price"]}} </span> <br>  </td>
+                              {% set image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference="+result['photo_ref']+"&sensor=false&key=key" %}
+                                <td> <img src="{{image}}" > </td>
+                               <td> <input type="submit" class="" value="view" ></td>
+                             </form>
+                              {% endfor %}
+                       </tr>
+                           
+                        </table>
+                      </div>
+                    </div>
+                   
+
+
+                 </div>
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    
+{% include 'footer.html' %}

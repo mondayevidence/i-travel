@@ -1,0 +1,82 @@
+{% include 'header.html' %}
+    <div class="fh5co-hero">
+      <div class=""></div>
+      <div class="" data-stellar-background-ratio="0.5" style="margin-top: 150px;">
+        <div class="desc">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <div class="tabulation animate-box">
+
+
+
+                   <!-- Tab panes -->
+                   <div role="tabpanel" class="tab-pane active" id="flights">
+                    <div class="row">
+                      <div class="col-xxs-12 col-xs-12 mt" style="color: black">
+                        <table border = 1>
+                          <tr>
+                            {% if user %}
+                            <th> Select </th>
+                            {% endif %}
+                            <th> Place </th>
+                            <th> Rating </th>
+                            <th> Address </th>
+                            <!-- <th> arrival time</th>
+                            <th> seats left </th> -->
+                            <th> Picture </th>
+                            <th> Link </th>
+                            <th> save </th>
+                            </tr>
+                            {% for result in results %}
+                            <tr>
+                              <form action = "http://localhost:5000/pl" method = "POST">
+                                <input type="hidden" name="name" value="{{result['name']}}" />
+                                <input type="hidden" name="lat" value="{{result['lat']}}" />
+                                <input type="hidden" name="lng" value="{{result['lng']}}" />
+                                {% if user %}
+                                <td> <input type="checkbox" class="form-control" name="places" value="{{result}}" /></td>
+                                {% endif %}
+                                <td> {{result["name"]}} </td>
+                                <td> {{result["rating"]}} </td>
+                                <td> {{result["formatted_address"]}} </td>
+                                <!-- <td> {{result["lat"]}} </td>
+                                <td> € {{result["lng"]}} </td> -->
+                                {% set image = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference="+result['photo_ref']+"&sensor=false&key=key" %}
+                                <td> <img src="{{image}}"> </td>
+                                <td> <input type="submit" class="btn btn-primary btn-block" name="action" value="view"></td>
+                                {% if user %}
+                               <td><input type="submit" class ="btn btn-primary btn-block " name="action" value = "save"></td>
+                                {% endif %}
+                              </form>
+                            </tr>
+                              {% endfor %}
+
+                        </table>
+                        <form action = "http://localhost:5000/mp" method = "POST">
+                                <input type="hidden" name="name" value="{{results}}" />
+                                <td> <input type="submit" class="btn btn-primary btn-block" value="view a tour route"></td>
+
+                              </form>
+
+                          <!-- {% for result in results %}
+                            <div>{{result["price"]}}</div>
+                          {% endfor %} -->
+                      </div>
+                    </div>
+                   </div>
+
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+{% include 'footer.html' %}
